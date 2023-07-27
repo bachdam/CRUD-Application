@@ -21,7 +21,26 @@ let createNewUser = async (req, res) => {
     [firstName, lastName, email, address]);
   return res.redirect('/');
 };
+
+let getEditPage = async (req, res) => {
+  let userId = req.params.userId;
+  let [user] = await pool.execute('Select * from users where id =?', [userId]); // has to be [user] or it will take both user and fields 
+  //return res.send(JSON.stringify(user));
+  return res.render(`update.ejs`, {dataUser: user[0]});
+}
+let deleteUser =  async (req, res) => {
+  let userId = req.body.userId;
+  await pool.execute(`delete from users where id = ?`, [userId]);
+  return res.redirect('/');
+}
+
+let postUpdateUser = async (req, res) => {
+  let {firstName, lastName, email, address, userId} = req.body;
+  await pool.execute('update users set firstname = ?, lastName = ?, email = ?, address = ? where id = ?', [firstName, lastName, email, address, userId]);
+  console.log('>>>check data: ', req.body );
+  return res.redirect('/');
+}
 //use this objects export to export many elements at once
 module.exports = {
-    getHomePage, getDetailPage, createNewUser
+    getHomePage, getDetailPage, createNewUser, deleteUser, getEditPage, postUpdateUser
 }

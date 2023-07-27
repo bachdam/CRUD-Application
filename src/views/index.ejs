@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="css/style.css"></link>
+    <link rel="stylesheet" href="/css/style.css"></link>
 </head>
 <body>
     <!-- <h1>Hello from ejs</h1> -->
@@ -39,8 +39,13 @@
                     <td><%= dataUser[i].lastName %></td>
                     <td>
                         <a href="./detail/user/<%= dataUser[i].id %>" target="_blank"> Detail</a>
-                        <button type="button"> Edit </button>
-                        <button type="button"> Delete </button>
+                        <form action="/edit-user/<%= dataUser[i].id %>" method="get">
+                            <button type="submit"> Edit </button>
+                        </form>
+                        <form action="/delete-user" method="post">
+                            <input type="text" hidden value="<%= dataUser[i].id %>" name="userId"/> <!-- use the text type to give a value and hide the text  -->
+                            <button type="submit"> Delete </button>
+                        </form>
                     </td>
                 </tr>
                 <% } %>
@@ -49,7 +54,7 @@
         </table>
 
         <div class="create-user-container">
-            <form action="/create-new-user" method="post"> <!-- whenever we create a new user, always use POST because it brings the data to database while get doesnt -->
+            <form action="/create-new-user" method="post"> <!-- whenever we create a new user, always use POST because it brings the data to database while GET doesnt -->
             <div>Create a new user:</div>
             <div>
                 <label>First Name:</label>

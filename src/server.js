@@ -5,6 +5,7 @@
 import express from "express";
 import configViewEngine from "./configs/viewengine";
 import initWebRoute from "./route/web";
+import initAPIRoute from "./route/api";
 //import connection from "./configs/connectDB";
 require('dotenv').config();
 
@@ -29,6 +30,9 @@ configViewEngine(app);
 
 //init web route
 initWebRoute(app);
+
+//init api routwe
+initAPIRoute(app);
 
 // app.get('/', (req, res) => {
 //   res.sendFile(path.join(__dirname, './index.html'))

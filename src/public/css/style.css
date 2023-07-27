@@ -55,3 +55,17 @@ body {
     margin-top: 20px;
     cursor: pointer;
   }
+
+  .update-user-container{
+    padding: 15px;
+    text-align: center;
+  }
+
+  .update-user-container label{
+    display: block;
+  }
+
+  .save-bttn{
+    margin-top: 15px;
+    cursor: pointer;
+  }
