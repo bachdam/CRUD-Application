@@ -14,20 +14,27 @@
     </div>
 
     <div class="upload-file-container">
+        <h1>Handling Files Upload with Node.js and Multer</h1>
         <form method="post" action="/upload-profile-pic" enctype="multipart/form-data"> <!-- enctype is neccessary -->
+
             <div>
-                <label> Avatar:</label>
-                <input type="file" name="profile_pic"/>
+                <h3>Upload a single image:</h3>
+                <div>
+                    <span> Upload your image:</span>
+                    <input type="file" name="profile_pic"/>
+                </div>
             </div>
     
             <div>
-                <button type="submit" class="save-bttn">Submit</button>
+                <button type="submit" class="save-bttn">Upload</button>
             </div>
         </form>
 
+        <hr/>
         <form method="POST" action="/upload-multiple-images" enctype="multipart/form-data">
+            <h3>Select multiple images:</h3>
             <div>
-                <label>Select multiple images:</label>
+                <span>Select your images</span>
                 <input type="file" name="multiple_images" multiple />
             </div>
             <div>
