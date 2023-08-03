@@ -8,8 +8,16 @@ import initWebRoute from "./route/web";
 import initAPIRoute from "./route/api";
 //import connection from "./configs/connectDB";
 require('dotenv').config();
+var morgan = require('morgan');
 
-const app = express()
+const app = express();
+
+app.use((req, res, next) => { //the req, res, next are important in middleware, if the req is valid, then kepp going (it is in express)
+  console.log(">>> Check run MiddleWare: ");
+  console.log(req.method);
+  next(); // after app.use, the program will stop so we need to use next() to continue it
+})
+app.use(morgan('combined'));
 //const port = 3000 // random number for the gate that the server can run separatedly
 const port = process.env.PORT || 8080; //backup ||
 console.log(">>>> check port: ", port);
@@ -38,6 +46,10 @@ initAPIRoute(app);
 //   res.sendFile(path.join(__dirname, './index.html'))
 // })
 
+//handle 404 not found with MiddleWare
+app.use((req, res) => {
+  return res.render('404.ejs'); //run the file 404.ejs
+})
 
 
 
