@@ -7,22 +7,21 @@ import configViewEngine from "./configs/viewengine";
 import initWebRoute from "./route/web";
 import initAPIRoute from "./route/api";
 //import connection from "./configs/connectDB";
-require('dotenv').config();
-var morgan = require('morgan');
+require("dotenv").config();
+var morgan = require("morgan");
 
 const app = express();
 
-app.use((req, res, next) => { //the req, res, next are important in middleware, if the req is valid, then kepp going (it is in express)
+app.use((req, res, next) => {
+  //the req, res, next are important in middleware, if the req is valid, then kepp going (it is in express)
   console.log(">>> Check run MiddleWare: ");
   console.log(req.method);
   next(); // after app.use, the program will stop so we need to use next() to continue it
-})
-app.use(morgan('combined'));
+});
+app.use(morgan("combined"));
 //const port = 3000 // random number for the gate that the server can run separatedly
 const port = process.env.PORT || 8080; //backup ||
 console.log(">>>> check port: ", port);
-
-
 
 //route of a website: to orient the website (dinhj huong website)
 // app.get('/', (req, res) => {
@@ -48,13 +47,10 @@ initAPIRoute(app);
 
 //handle 404 not found with MiddleWare
 app.use((req, res) => {
-  return res.render('404.ejs'); //run the file 404.ejs
-})
-
-
-
+  return res.render("404.ejs"); //run the file 404.ejs
+});
 
 //callback function
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
+  console.log(`Example app listening on port ${port}`);
+});
